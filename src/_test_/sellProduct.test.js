@@ -1,14 +1,35 @@
 import {sellProduct} from '../sellProduct.js';
-import React from 'react';
 
-// test('product name update', ()=>{
-//   expect(sellProduct('Black hole')).toEqual(true);
-// })
+test('product is valid object', ()=>{
+  let product ={
+    name: 'Black hole', price: '99.95', count: 5,
+  }
+  expect(sellProduct(product)).toEqual(true);
+})
 
-// test('product count update', ()=>{
-//   expect(sellProduct(5)).toEqual(5);
-// })
+test('product is not valid object', ()=>{
+  expect(sellProduct("hello")).toEqual(false);
+})
 
-test('not finish test yet but return true', ()=>{
-  expect(sellProduct(true)).toBe(true);
+test('throw error if no products', () =>{
+  let product ={
+    name: 'Black hole', price: '99.95', count: 0,
+  }
+  expect( () => sellProduct(product)).toThrow()
+})
+
+test('product count works fine', ()=>{
+  let product ={
+    name: 'Black hole', price: '99.95', count: 5,
+  }
+  sellProduct(product);
+  expect(product.count).toBe(4)
+})
+
+test('product count "10" works', ()=>{
+  let product ={
+    name: 'Black hole', price: '99.95', count: "10",
+  }
+  sellProduct(product);
+  expect(product.count).toBe(9);
 })
